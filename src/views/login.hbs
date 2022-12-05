@@ -1,0 +1,63 @@
+<div class="" style="height: calc(100vh - 112px); display: flex; align-items: center; justify-content: center">
+    <form action="/auth/save" method="POST" style="width: 400px; background-color: #dbdbdb" class="p-4 rounded-2">
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+            <label class="form-label" for="username">Username</label>
+            <input type="text" id="username" class="form-control" name="username" required />
+        </div>
+
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+            <label class="form-label" for="password">Password</label>
+            <input type="password" id="password" class="form-control" name="password" required />
+        </div>
+
+        <!-- ID input -->
+        <div class="form-outline mb-4">
+            <label class="form-label" for="id">ID</label>
+            <input type="text" id="id" class="form-control" name="id" required />
+        </div>
+
+        <!-- 2 column grid layout for inline styling -->
+        <div class="row mb-4">
+            <div class="col">
+                <!-- Checkbox -->
+                <div class="form-check">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="type" id="type-admin" value="admin" checked>
+                        <label class="form-check-label" for="type-admin">
+                            Admin
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="type" value="employee" id="type-employee">
+                        <label class="form-check-label" for="type-employee">
+                            Employee
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="type" value="driver" id="type-driver">
+                        <label class="form-check-label" for="type-driver">
+                            Driver
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="type" value="partner" id="type-partner">
+                        <label class="form-check-label" for="type-partner">
+                            Partner
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="type" value="user" id="type-user">
+                        <label class="form-check-label" for="type-user">
+                            User
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4 w-100">Login</button>
+    </form>
+</div>
