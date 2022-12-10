@@ -1,0 +1,44 @@
+<div class="">
+    <nav aria-label="breadcrumb" class="my-2 d-flex align-items-center justify-content-between">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/" class="text-dark">Home</a></li>
+        </ol>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/profile" class="text-dark">Account</a></li>
+        </ol>
+    </nav>
+    <div class="app" style="width: 100%; min-height: calc(100vh - 112px); padding: 0 1em;">
+        <h1 class="cart-header ">Quản lý đơn hàng</h1>
+        <div class="cart-table">
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Option</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each items}}
+                    <tr>
+                        <th scope="row">{{sum @index 1}}</th>
+                        <td>{{this.TenMon}}</td>
+                        <td>
+                            <input type="number" class="cart-quantity" value="{{this.SoLuong}}" disabled>
+                        </td>
+                        <td>{{this.GiaBan}}</td>
+                        <td>
+                            <a href="/cart/{{ID_DonHang}}/order" type="button" class="btn btn-success">Edit</a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <div class="d-grid gap-2 col-3 mx-auto">
+            <a href="/" class="btn btn-secondary" type="button">Back</a>
+        </div>
+    </div>
+</div>

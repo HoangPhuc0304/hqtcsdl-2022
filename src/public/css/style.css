@@ -2,3 +2,160 @@ body {
     margin: 0;
     background-color: #e9ecef !important;
 }
+/* Giao diện giỏ hàng */
+.cart-header {
+    text-align: center;
+    padding-top: 30px;
+}
+
+.cart-table {
+    margin: 50px 100px 0 100px;
+}
+
+.cart-quantity {
+    width: 50px;
+}
+
+.rating {
+    color: #ffce3d;
+}
+
+/* Giao diện giỏ hàng */
+.partner-header {
+    text-align: center;
+    padding-top: 30px;
+}
+
+.partner-list {
+    list-style: none;
+}
+
+.partner-item {
+    display: block;
+    background-color: #fff;
+    position: relative;
+    border-radius: 5px;
+    margin-right: 40px;
+    margin-bottom: 20px;
+}
+
+.partner-img {
+    width: 125px;
+    height: 125px;
+    margin-top: 12px;
+    margin-left: 12px;
+    border-radius: 5px;
+}
+
+.partner-item-left {
+    display: flex;
+    height: 150px;
+}
+
+.partner-item-right {
+    position: absolute;
+    right: 30px;
+    top: 0px;
+    height: 150px;
+    line-height: 50px;
+}
+
+.partner-content {
+    margin-left: 20px;
+    margin-top: 12px;
+}
+
+/* Chi tiết sản phẩm */
+.detail-content {
+    display: flex;
+    height: 550px;
+    width: 1200px;
+    margin-left: 150px;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.detaile-header {
+    text-align: center;
+}
+
+.detail-img {
+    width: 400px;
+    height: 400px;
+    border-radius: 5px;
+}
+
+.detail-content-left {
+    margin-left: 30px;
+}
+
+.detail-content-right {
+    height: 400px;
+    margin-left: 30px;
+}
+
+.detail-content-header {
+    margin-bottom: 20px;
+}
+
+.detail-price {
+    margin-top: 20px;
+    color: rgb(239, 49, 49);
+}
+
+.detail-quantity {
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.detail-quantity-input {
+    margin-left: 10px;
+    width: 45px;
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+.detail-describe-container {
+    margin-top: 20px;
+}
+
+/* Danh sách Sản phẩm */
+.list-product-header {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.product-container {
+    display: flex;
+    width: 1290px;
+    max-width: 100%;
+    /* margin-top: 70px; */
+    margin-left: auto;
+    margin-right: auto;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.product-item {
+    width: 250px;
+    height: 420px;
+    background-color: #fff;
+    margin: 40px 5px 0 5px;
+    border-radius: 10px;
+}
+
+.product-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 5px;
+    margin: 25px 0 25px 25px;
+}
+
+.product-content {
+    margin-left: 25px;
+}
+
+.product-price {
+    color: #ee5233;
+}

@@ -1,7 +1,10 @@
 const express = require('express');
-const homeRouter = require('./home');
-const driverRouter = express.Router();
+const { ProfileController, PackageController } = require('../../controllers/driver');
+const partnerRouter = express.Router();
 
-driverRouter.use('/', homeRouter);
+partnerRouter.get('/package/:id/edit', PackageController.view);
+partnerRouter.post('/package/:id/edit', PackageController.edit);
+partnerRouter.get('/profile', ProfileController.index);
+partnerRouter.get('/', PackageController.index);
 
-module.exports = driverRouter;
+module.exports = partnerRouter;

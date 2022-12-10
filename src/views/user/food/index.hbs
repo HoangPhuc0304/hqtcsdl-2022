@@ -1,0 +1,35 @@
+<div class="" style="width: 100%; min-height: calc(100vh - 112px); padding: 0 1em;">
+    <nav aria-label="breadcrumb" class="my-2 d-flex align-items-center justify-content-between">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/" class="text-dark">Home</a></li>
+            <li class="breadcrumb-item"><a href="/cart" class="text-dark">Cart</a></li>
+        </ol>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/profile" class="text-dark">Account</a></li>
+        </ol>
+    </nav>
+    <h1 class="partner-header ">Danh sách món ăn của tối tác {{ID_DoiTac}}</h1>
+    <div class="product-container">
+        {{#each foods}}
+        <a href="/foods/{{this.ID_Mon}}/details" style="text-decoration: none;">
+            <div class="product-item">
+                <img class="product-img" src="/static/images/Food.jpg" alt="">
+                <div class="product-content">
+                    <h3
+                        style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 64px;">
+                        {{this.TenMon}}</h3>
+                    <h4 class="product-price">{{this.GiaBan}}</h4>
+                    <span style="display: block;">
+                        <i class="bi bi-pencil-square"></i>
+                        {{this.MieuTa}}
+                    </span>
+                    <span class="badge bg-light text-dark me-2">
+                        <i class="bi bi-shop"></i>
+                        {{this.ID_CuaHang}}
+                    </span>
+                </div>
+            </div>
+        </a>
+        {{/each}}
+    </div>
+</div>

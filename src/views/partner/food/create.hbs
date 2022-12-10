@@ -1,0 +1,43 @@
+<div class="container" style="height: calc(100vh - 112px);">
+    <nav aria-label="breadcrumb" class="my-2 d-flex align-items-center justify-content-between">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/partner" class="text-dark">Home</a></li>
+        </ol>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/partner/profile" class="text-dark">Account</a></li>
+        </ol>
+    </nav>
+    <h1 class="cart-header ">Tạo món ăn mới cho cửa hàng {{ID_CuaHang}}</h1>
+    <div class="card">
+        <div class="card-body">
+            <form action="/partner/food/{{ID_CuaHang}}/create" method="POST">
+                <div class="form-group mb-3">
+                    <label class=" control-label no-padding-right" for="name">Name:</label>
+                    <div style="display: flex; flex-direction: column;">
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label class=" control-label no-padding-right" for="description">Description:</label>
+                    <div style="display: flex; flex-direction: column;">
+                        <input type="text" id="description" name="description" required>
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label class=" control-label no-padding-right" for="price">Price:</label>
+                    <div style="display: flex; flex-direction: column;">
+                        <input type="text" id="price" name="price" required>
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label class=" control-label no-padding-right" for="status">Status:</label>
+                    <div style="display: flex; flex-direction: column;">
+                        <input type="text" id="status" name="status" required>
+                    </div>
+                </div>
+                <a href="/partner" class="btn btn-secondary" style="width: 100px;">Back</a>
+                <button type="submit" class="btn btn-primary" style="width: 100px;">Create</button>
+            </form>
+        </div>
+    </div>
+</div>

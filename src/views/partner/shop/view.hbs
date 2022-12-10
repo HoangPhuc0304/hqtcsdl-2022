@@ -1,0 +1,46 @@
+<div class="container" style="height: calc(100vh - 112px);">
+    {{#with shop}}
+    <nav aria-label="breadcrumb" class="my-2 d-flex align-items-center justify-content-between">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/partner" class="text-dark">Home</a></li>
+            <li class="breadcrumb-item"><a href="/partner/package/{{ID_CuaHang}}" class="text-dark">Packages</a></li>
+        </ol>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/partner/profile" class="text-dark">Account</a></li>
+        </ol>
+    </nav>
+    <h1 class="cart-header ">Quản lý cửa hàng {{ID_CuaHang}}</h1>
+    <div class="card">
+        <div class="card-body">
+            <form action="/partner/shop/{{ID_CuaHang}}/edit" method="POST">
+                <div class="form-group mb-3">
+                    <label class=" control-label no-padding-right" for="name">Name:</label>
+                    <div style="display: flex; flex-direction: column;">
+                        <input type="text" id="name" name="name" required value="{{TenCuaHang}}">
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label class=" control-label no-padding-right" for="working-time">Working Time:</label>
+                    <div style="display: flex; flex-direction: column;">
+                        <input type="text" id="working-time" name="working-time" disabled value="{{TgHoatDong}}">
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label class=" control-label no-padding-right" for="change-name-time">Change Name Time:</label>
+                    <div style="display: flex; flex-direction: column;">
+                        <input type="text" id="change-name-time" name="change-name-time" disabled value="{{TgDoiTen}}">
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label class=" control-label no-padding-right" for="status">Status:</label>
+                    <div style="display: flex; flex-direction: column;">
+                        <input type="text" id="status" name="status" value="{{TinhTrangCuaHang}}" required>
+                    </div>
+                </div>
+                <a href="/partner" class="btn btn-secondary" style="width: 100px;">Back</a>
+                <button type="submit" class="btn btn-primary" style="width: 100px;">Save</button>
+            </form>
+        </div>
+    </div>
+    {{/with}}
+</div>

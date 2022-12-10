@@ -1,1 +1,46 @@
-<h3>Driver Page</h3>
+<div class="" style="width: 100%; min-height: calc(100vh - 112px); padding: 0 1em;">
+    <nav aria-label="breadcrumb" class="my-2 d-flex align-items-center justify-content-between">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/driver" class="text-dark">Home</a></li>
+        </ol>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/driver/profile" class="text-dark">Account</a></li>
+        </ol>
+    </nav>
+    <div class="app" style="width: 100%; min-height: calc(100vh - 112px); padding: 0 1em;">
+        <div class="text-center">
+            <h1 class="cart-header">Danh sách các đơn hàng của tài xế {{driverId}}</h1>
+        </div>
+        <div class="cart-table">
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ID Package</th>
+                        <th scope="col">ID Customer</th>
+                        <th scope="col">ID Driver</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Option</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each items}}
+                    <tr>
+                        <th scope="row">{{sum @index 1}}</th>
+                        <td>{{this.ID_DonHang}}</td>
+                        <td>{{this.ID_KhachHang}}</td>
+                        <td>{{this.ID_TaiXe}}</td>
+                        <td>{{this.DiaChiGiaoHang}}</td>
+                        <td>{{this.TinhTrangDonHang}}</td>
+                        <td>
+                            <a href="/driver/package/{{this.ID_DonHang}}/edit" type="button"
+                                class="btn btn-success">Edit</a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

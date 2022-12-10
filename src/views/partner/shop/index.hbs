@@ -1,0 +1,51 @@
+<div class="" style="width: 100%; min-height: calc(100vh - 112px); padding: 0 1em;">
+    <nav aria-label="breadcrumb" class="my-2 d-flex align-items-center justify-content-between">
+        <ol class="breadcrumb">
+            {{#each shops}}
+            <li class="breadcrumb-item"><a href="/partner/shop/{{ID_CuaHang}}" class="text-dark">{{ID_CuaHang}}</a></li>
+            {{/each}}
+        </ol>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/partner/profile" class="text-dark">Account</a></li>
+        </ol>
+    </nav>
+    <div class="app" style="width: 100%; min-height: calc(100vh - 112px); padding: 0 1em;">
+        {{#with shop}}
+        <div class="text-center">
+            <h1 class="cart-header">Quản lý món ăn của cửa hàng {{ID_CuaHang}}</h1>
+            <a href="/partner/shop/{{ID_CuaHang}}/view">view</a>
+        </div>
+        {{/with}}
+        <div class="cart-table">
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Option</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each foods}}
+                    <tr>
+                        <th scope="row">{{sum @index 1}}</th>
+                        <td>{{this.TenMon}}</td>
+                        <td>{{this.TinhTrangMon}}</td>
+                        <td>{{this.GiaBan}}</td>
+                        <td>
+                            <a href="/partner/food/{{this.ID_Mon}}" type="button" class="btn btn-success">Edit</a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        {{#with shop}}
+        <div class="w-100 text-center">
+            <a href="/partner/food/{{ID_CuaHang}}/create" class="btn btn-primary">Create New Food</a>
+        </div>
+        {{/with}}
+    </div>
+</div>

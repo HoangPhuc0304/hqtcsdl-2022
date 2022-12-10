@@ -1,0 +1,94 @@
+<div class="container" style="height: calc(100vh - 112px);">
+    <nav aria-label="breadcrumb" class="my-2 d-flex align-items-center justify-content-between">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/partner" class="text-dark">Home</a></li>
+        </ol>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/partner/profile" class="text-dark">Account</a></li>
+        </ol>
+    </nav>
+    <div class="card">
+        {{#with item}}
+        <div class="card-body">
+            <h1 class="cart-header">Xác nhận đơn hàng {{ID_DonHang}}</h1>
+            <div class="row">
+                <form action="/partner/package/{{ID_DonHang}}/edit" method="POST">
+                    <div class="form-group mb-3">
+                        <label class=" control-label no-padding-right" for="packageId">ID Package:</label>
+                        <div style="display: flex; flex-direction: column;">
+                            <input type="text" id="packageId" name="packageId" disabled value="{{ID_DonHang}}">
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class=" control-label no-padding-right" for="userId">ID Customer:</label>
+                        <div style="display: flex; flex-direction: column;">
+                            <input type="text" id="userId" name="userId" disabled value="{{ID_KhachHang}}">
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class=" control-label no-padding-right" for="driverId">ID Driver:</label>
+                        <div style="display: flex; flex-direction: column;">
+                            <input type="text" id="driverId" name="driverId" disabled value="{{ID_TaiXe}}">
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class=" control-label no-padding-right" for="food">Name Food:</label>
+                        <div style="display: flex; flex-direction: column;">
+                            <input type="text" id="food" name="food" disabled value="{{TenMon}}">
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class=" control-label no-padding-right" for="price">Price:</label>
+                        <div style="display: flex; flex-direction: column;">
+                            <input type="text" id="price" name="price" disabled value="{{GiaBan}}">
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class=" control-label no-padding-right" for="quantity">Quantity:</label>
+                        <div style="display: flex; flex-direction: column;">
+                            <input type="text" id="quantity" name="quantity" disabled value="{{SoLuong}}">
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class=" control-label no-padding-right" for="payment">Payment method:</label>
+                        <div style="display: flex; flex-direction: column;">
+                            <input type="text" id="payment" name="payment" disabled value="{{HinhThucThanhToan}}">
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class=" control-label no-padding-right" for="address">Address:</label>
+                        <div style="display: flex; flex-direction: column;">
+                            <input type="text" id="address" name="address" disabled value="{{DiaChiGiaoHang}}">
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class=" control-label no-padding-right" for="predictedTime">Predict Time:</label>
+                        <div style="display: flex; flex-direction: column;">
+                            <input type="text" id="predictedTime" name="predictedTime" disabled value="{{TgGiao}}">
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class=" control-label no-padding-right" for="status">Status:</label>
+                        <div style="display: flex; ">
+                            <input type="checkbox" id="status-checkbox" class="me-3">
+                            <input type="text" id="status" name="status" required value="{{TinhTrangDonHang}}">
+                        </div>
+                    </div>
+                    <a href="/partner" class="btn btn-secondary" style="width: 100px;">Back</a>
+                    <button type="submit" class="btn btn-primary" style="width: 100px;">Save</button>
+                </form>
+            </div>
+        </div>
+        {{/with}}
+    </div>
+</div>
+
+<script type="text/javascript">
+    const checkbox = document.querySelector('#status-checkbox');
+    const status = document.querySelector('#status');
+    checkbox.onchange = (e) => {
+        if(checkbox.checked) {
+            status.value = 'Đã tiếp nhận';
+        }
+    }
+</script>

@@ -10,7 +10,8 @@ const ProfileController = {
             res.render('user/profile', { user: user });
         } catch (err) {
             console.log(err);
-            res.render('user/profile', { type: 'error', message: 'Something wrong!!! Please try again.' });
+            req.flash('Error', `${err}`);
+            res.redirect('/');
         }
     },
 };
