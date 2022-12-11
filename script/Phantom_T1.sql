@@ -1,0 +1,43 @@
+﻿USE DB_UDBH
+GO
+
+CREATE PROC sp_XemDanhSachMon
+	@ID_DoiTac CHAR(10)
+AS
+BEGIN TRAN
+	IF NOT EXISTS (
+		SELECT * 
+		FROM DOI_TAC 
+		WHERE ID_DoiTac = @ID_DoiTac
+	)
+	BEGIN
+		PRINT(N'Không tồn tại đối tác với ID là ' + @ID_DoiTac)
+		ROLLBACK TRAN
+		RETURN
+	END
+
+	SELECT * 
+	FROM MON
+	WHERE ID_Mon IN (
+		SELECT ID_Mon 
+		FROM THUC_DON TD, CUA_HANG CH, HOP_DONG HD
+		WHERE HD.ID_DoiTac = @ID_DoiTac AND HD.ID_HopDong = CH.ID_HopDong 
+		AND CH.ID_CuaHang = TD.ID_CuaHang
+	)
+
+	WAITFOR DELAY '00:00:05'
+
+	SELECT * 
+	FROM MON
+	WHERE ID_Mon IN (
+		SELECT ID_Mon 
+		FROM THUC_DON TD, CUA_HANG CH, HOP_DONG HD
+		WHERE HD.ID_DoiTac = @ID_DoiTac AND HD.ID_HopDong = CH.ID_HopDong 
+		AND CH.ID_CuaHang = TD.ID_CuaHang
+	)
+COMMIT TRAN
+RETURN
+GO
+
+EXEC sp_XemDanhSachMon 'DT01'
+DROP PROC sp_XemDanhSachMon

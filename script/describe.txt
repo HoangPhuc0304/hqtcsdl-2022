@@ -1,0 +1,50 @@
++) lost update:
+2 nhân viên cùng 1 đối tác thay đổi món ăn trên cùng 1 sp cơm sườn (35000)
+nv1 tăng món ăn lên 1000
+nv2 tăng món ăn lên 2000
+Kết quả 37000 => thay đổi của nv1 ko dc cập nhật => lost update
++) Fix lost update
+2 nhân viên cùng 1 đối tác thay đổi món ăn trên cùng 1 sp cơm sườn (35000)
+nv1 tăng món ăn lên 1000
+nv2 tăng món ăn lên 2000
+Kết quả 38000 => thay đổi của của cả 2 đều dc cập nhật 
+
++) Dirty Read
+KH thực hiện hủy đơn hàng khi trạng thái "đã tiếp nhận", tài xế đọc được giữ liệu rác "đã hủy"
++) Fix dirty read
+KH thực hiện hủy đơn hàng khi trạng thái "đã tiếp nhận", tài xế vẫn thấy là "đã tếp nhận" => tránh đọc dữ liệu rác
+
++) Unrepeatable Read
+KH xem tình trạng giao hàng của đơn hàng 
+Tài xế cập nhật tình trạng đơn hàng là đang giao
+=> KH xem lần đầu xem là "chờ nhận" nhưng lần sau là "đang giao"
++) Fix Unrepeatable Read
+KH xem tình trạng giao hàng của đơn hàng 
+Tài xế cập nhật tình trạng đơn hàng là đang giao
+=> KH xem lần đầu xem là "chờ nhận", lần đọc sau khi tài xế chỉnh sửa thì phải chờ lần đọc 2 của KH đọc xong thì mới chỉnh sửa được. 
+Nên lần đọc sau vẫn là chờ nhận
+
++) Phantom
+KH xem danh sách món ăn ở cửa hàng của 1 đối tác
+Đối tác thêm một món ăn mới vào
+=> KH xem lần đầu là xem có 2 món, nhưng lần xem sau lại thấy 3 món
++) Fix Phantom
+KH xem danh sách món ăn ở cửa hàng của 1 đối tác
+Đối tác thêm một món ăn mới vào
+=> KH xem lần đầu xem có 2 món, lần đọc sau khi đối tác thêm món vào thì phải chờ lần đọc 2 của KH đọc xong thì mới chỉnh sửa được. 
+Nên lần đọc sau vẫn chỉ có 2 món
+
++) Conversation Deadlock
+2 nhân viên của đối tác cùng chỉnh sửa trạng thái cửa hàng của cùng 1 cửa hàng
+=> Deadlock xảy ra ở nhân viên thứ 2
++) Fix Conversation Deadlock
+2 nhân viên của đối tác cùng chỉnh sửa trạng thái cửa hàng của cùng 1 cửa hàng
+=> Ko còn tình trạng deadlock
+
++) Circle Deadlock
+2 nhân viên của đối tác cùng tiến hành đóng cửa hàng chỉnh sửa trạng thái cửa hàng là "tạm nghỉ". Khi đóng cửa hàng thì mặc định 
+các trạng thái món ăn của cửa hàng đó sẽ đều về trạng thái "ngưng bán"
+=> Deadlock xảy ra khi ở 1 nhân viên (nv 1 thực hiện cập nhật món ăn trc, sau đó cập nhật cửa hàng. nv2 thực hiện cập nhật cửa hàng trc, sau đó 
+cập nhật món ăn)
++) Fix Circle Deadlock
+các nv cùng thực hiện theo thứ tự thay đổi trạng thái món ăn trc, sau đó mới thay đổi trạng thái cửa hàng => ko còn deadlock
