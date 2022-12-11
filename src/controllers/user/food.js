@@ -31,16 +31,13 @@ const FoodController = {
       const pool = await DB_ADMIN;
       const { id } = req.params;
       const data = await pool.request().query(`
-      SELECT M.*, CH.ID_CuaHang, CH.TenCuaHang, CH.TgHoatDong, CH.TinhTrangCuaHang
-      FROM MON M, THUC_DON TD, CUA_HANG CH, HOP_DONG HD
-      WHERE HD.ID_DoiTac = '${id}' AND HD.ID_HopDong = CH.ID_HopDong AND CH.ID_CuaHang = TD.ID_CuaHang AND TD.ID_Mon = M.ID_Mon
+      EXEC sp_XemDanhSachMon '${id}'
       `);
-      var foods = data.recordset;
+      var foods = data.recordsets[1];
       foods = foods.map(food => ({
         ...food,
         ID_Mon: food.ID_Mon.trim(),
-        ID_CuaHang: food.ID_CuaHang.trim(),
-      }))
+      }));
       res.render('user/food', { foods, ID_DoiTac: id });
     } catch (err) {
       console.log(err);

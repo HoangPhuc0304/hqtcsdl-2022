@@ -7,18 +7,14 @@ const PackageController = {
             const errorMsg = req.flash('Error')[0];
             const pool = await DB_DRIVER;
             const driverId = req.cookies.Id;
-            const packageData = await pool.request().query(`
-            SELECT *
-            FROM DON_HANG DH, CHI_TIET_DON_HANG CTDH
-            WHERE DH.ID_TaiXe = '${driverId}' AND DH.ID_DonHang = CTDH.ID_DonHang`);
+            const packageData = await pool.request().query(`EXEC sp_XemDonHang_TaiXe '${driverId}'`);
 
             var items = packageData.recordset;
             items = items.map(item => ({
                 ...item,
-                ID_DonHang: item.ID_DonHang[0].trim(),
+                ID_DonHang: item.ID_DonHang.trim(),
                 ID_KhachHang: item.ID_KhachHang.trim(),
                 ID_TaiXe: item.ID_TaiXe.trim(),
-                ID_Mon: item.ID_Mon.trim(),
             }));
 
             if (successMsg) {
@@ -67,9 +63,7 @@ const PackageController = {
             const { status } = req.body;
 
             const itemData = await pool.request().query(`
-            UPDATE DON_HANG
-            SET TinhTrangDonHang = N'${status}'
-            WHERE ID_DonHang = '${id}'
+            EXEC usp_capNhatTinhTrangDonHang '${id}', N'${status}'
             `);
 
             req.flash('Success', 'Update a package successfully');

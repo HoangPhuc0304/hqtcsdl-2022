@@ -119,10 +119,15 @@ const ShopController = {
             const { name, status } = req.body;
 
             if (status) {
-                const updatedStatus = await pool.request().query(`
-                UPDATE CUA_HANG
-                SET TinhTrangCuaHang = N'${status}'
-                WHERE ID_CuaHang = '${id}'`);
+                if (status === 'Tạm nghỉ') {
+                    const updatedStatus = await pool.request().query(`
+                    EXEC usp_DongCH_T1 '${id}'
+                    `);
+                } else {
+                    const updatedStatus = await pool.request().query(`
+                    EXEC sp_CapNhatTinhTrangCuaHang_T1 '${id}', N'${status}'
+                    `);
+                }
             }
             if (name) {
                 const oldNameData = await pool.request().query(`

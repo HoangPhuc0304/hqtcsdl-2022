@@ -64,7 +64,6 @@ const CartController = {
             });
         } catch (err) {
             console.log(err);
-            // res.render('user', { type: 'error', message: 'Something wrong!!! Please try again.' });
             req.flash('Error', `${err}`);
             res.redirect('/');
         }
@@ -74,9 +73,7 @@ const CartController = {
             const pool = await DB_USER;
             const { id } = req.params;
             const itemData = await pool.request().query(`
-            SELECT * 
-            FROM DON_HANG DH, CHI_TIET_DON_HANG CTDH, MON M
-            WHERE DH.ID_DonHang = '${id}' AND DH.ID_DonHang = CTDH.ID_DonHang AND CTDH.ID_Mon = M.ID_Mon  
+            exec usp_kiemTraTinhTrangDonHang '${id}'
             `);
 
             const addressesData = await pool.request().query(`
@@ -84,17 +81,15 @@ const CartController = {
             FROM DON_HANG DH, CHI_TIET_DON_HANG CTDH
             WHERE DH.ID_KhachHang = 'KH01' AND DH.ID_DonHang = CTDH.ID_DonHang
             `)
-
-            const item = itemData.recordset[0];
+            const item = itemData.recordsets[1][0];
             const addresses = addressesData.recordset;
 
             res.render('user/cart/edit', {
                 item: {
                     ...item,
-                    ID_Mon: item.ID_Mon[0].trim(),
                     ID_KhachHang: item.ID_KhachHang.trim(),
                     ID_TaiXe: item.ID_TaiXe.trim(),
-                    ID_DonHang: item.ID_DonHang[0].trim(),
+                    ID_DonHang: item.ID_DonHang.trim(),
                 },
                 addresses: addresses
             });

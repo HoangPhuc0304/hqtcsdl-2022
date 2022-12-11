@@ -7,6 +7,7 @@ const ProfileController = {
             const pool = await DB_ADMIN;
             const data = await pool.request().query(`SELECT * FROM KHACH_HANG WHERE ID_KhachHang = '${userId}'`);
             const user = data.recordset[0];
+            console.log(userId);
             res.render('user/profile', { user: user });
         } catch (err) {
             console.log(err);

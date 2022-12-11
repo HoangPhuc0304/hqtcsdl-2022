@@ -26,14 +26,8 @@ const FoodController = {
 
       //Thêm Món
       const insertedFood = await pool.request().query(`
-            INSERT INTO MON
-            VALUES ('${idNewFood}',N'${name}',N'${description}','${price}',N'${status}')  
-            `)
-      //Thêm chi tiết đơn hàng
-      const insertedMenu = await pool.request().query(`
-            INSERT INTO THUC_DON
-            VALUES ('${id}','${idNewFood}')  
-            `)
+      EXEC sp_ThemMon '${id}','${idNewFood}',N'${name}',N'${description}',${price},N'${status}'
+      `);
       req.flash('Success', 'Create a food successfully');
       res.redirect('/partner');
     } catch (err) {
@@ -68,14 +62,28 @@ const FoodController = {
     try {
       const pool = await DB_PARTNER;
       const { id } = req.params;
-      const { name, description, price, status } = req.body;
+      const { name, description, change, status } = req.body;
+      if (Number(change) != 0) {
+        const priceData = await pool.request().query(`
+        exec usp_capNhatGiaMon_T1 '${id}', ${Number(change)}
+        `);
+      }
 
-      const foodData = await pool.request().query(`
-      UPDATE MON
-      SET TenMon = N'${name}', MieuTa = N'${description}', GiaBan = '${price}', TinhTrangMon = N'${status}' 
-      WHERE ID_Mon = '${id}'
-      `)
+      if (status) {
+        const oldStatusData = await pool.request().query(`
+        SELECT TinhTrangMon
+        FROM MON
+        WHERE ID_Mon = '${id}'`);
+        const oldStatus = oldStatusData.recordset[0];
 
+        if (status != oldStatus.TinhTrangMon) {
+          const foodData = await pool.request().query(`
+          update MON
+          set TinhTrangMon = N'${status}'
+          where ID_Mon = '${id}'
+          `)
+        }
+      }
       req.flash('Success', 'Update a food successfully');
       res.redirect('/partner');
     } catch (err) {
